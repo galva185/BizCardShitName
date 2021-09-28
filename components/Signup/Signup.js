@@ -28,19 +28,20 @@ const Signup = (props) => {
     const [password2, setPassword2] = useState("");
 
     const handlePress = (event) => {
-        console.log(email)
+        console.log(email);
         if (userpassword === password2) {
             axios({
-                method: 'post',
-                url: 'https://business-card-backend-qkym9.ondigitalocean.app/createuser',
-                data:{
+                method: "post",
+                url: "https://business-card-backend-qkym9.ondigitalocean.app/createuser",
+                data: {
                     firstname: firstname,
                     lastname: lastname,
-                    email: email, 
+                    email: email,
                     userpassword: userpassword,
-                    username: username
-                }
-            }).then(function (response) {
+                    username: username,
+                },
+            })
+                .then(function (response) {
                     console.log(response.request);
                     navigation.navigate("AddBook");
                 })
@@ -139,6 +140,12 @@ const Signup = (props) => {
                 />
             </View>
 
+            <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+                <Text style={styles.forgot_button}>
+                    Already have an account? Log In
+                </Text>
+            </TouchableOpacity>
+
             <TouchableOpacity
                 style={styles.loginBtn}
                 onPress={() => {
@@ -186,6 +193,7 @@ const styles = StyleSheet.create({
     forgot_button: {
         height: 30,
         marginBottom: 0,
+        marginTop: 3,
     },
 
     loginBtn: {
@@ -194,7 +202,7 @@ const styles = StyleSheet.create({
         height: 50,
         alignItems: "center",
         justifyContent: "center",
-        marginTop: 20,
+        marginTop: 15,
         backgroundColor: "#21b58b",
     },
 });

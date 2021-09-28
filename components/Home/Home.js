@@ -10,14 +10,21 @@ import {
     TouchableOpacity,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { NavigationContainer } from "@react-navigation/native";
+import {
+    NavigationContainer,
+    CommonActions,
+    StackActions,
+} from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-const LandingPage = (props) => {
+//remove these imports when other pages are made succesfully
+import Signup from "../Signup/Signup.js";
+import LandingPage from "../LandingPage/LandingPage.js";
+import Login from "../Login/Login.js";
+
+function HomePage(props) {
     const { navigation } = props;
-
-    const handlePress = () => {};
-
     return (
         <View style={styles.container}>
             <Text style={styles.TextInput}>CARDS</Text>
@@ -34,13 +41,28 @@ const LandingPage = (props) => {
             >
                 <Text style={styles.loginText}>SIGN UP</Text>
             </TouchableOpacity>
-            <TouchableOpacity
-                style={styles.loginBtn}
-                onPress={() => navigation.navigate("Home")}
-            >
-                <Text style={styles.loginText}>GO HOME</Text>
-            </TouchableOpacity>
         </View>
+    );
+}
+
+const Tab = createBottomTabNavigator();
+
+const Home = (props) => {
+    const { navigation } = props;
+
+    const handlePress = () => {};
+
+    return (
+        <Tab.Navigator
+            screenOptions={{
+                headerShown: false,
+            }}
+            initialRouteName="Home Page"
+        >
+            <Tab.Screen name="Home Page" component={HomePage} />
+            <Tab.Screen name="Login" component={Login} />
+            <Tab.Screen name="Signup" component={Signup} />
+        </Tab.Navigator>
     );
 };
 
@@ -89,4 +111,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default LandingPage;
+export default Home;

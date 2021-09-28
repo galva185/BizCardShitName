@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "./components/Login/Login.js";
 import Signup from "./components/Signup/Signup.js";
 import LandingPage from "./components/LandingPage/LandingPage.js";
+import Home from "./components/Home/Home.js";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 const Tab = createBottomTabNavigator();
@@ -14,6 +15,19 @@ const Stack = createNativeStackNavigator();
 export default function App() {
     return (
         <NavigationContainer>
+            <Stack.Navigator
+                screenOptions={{
+                    headerShown: false,
+                }}
+                initialRouteName="Landing Page"
+            >
+                <Stack.Screen name="Landing Page" component={LandingPage} />
+                <Stack.Screen name="Login" component={Login} />
+                <Stack.Screen name="Signup" component={Signup} />
+                <Stack.Screen name="Home" component={Home} />
+            </Stack.Navigator>
+
+            {/** 
             <Tab.Navigator
                 screenOptions={{
                     headerShown: false,
@@ -24,6 +38,7 @@ export default function App() {
                 <Tab.Screen name="Login" component={Login} />
                 <Tab.Screen name="Signup" component={Signup} />
             </Tab.Navigator>
+            */}
         </NavigationContainer>
     );
 }
