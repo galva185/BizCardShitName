@@ -10,38 +10,33 @@ import {
     TouchableOpacity,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const LandingPage = (props) => {
     const { navigation } = props;
 
-    const handlePress = () => {
-    };
-
+    const handlePress = () => {};
 
     return (
         <KeyboardAwareScrollView contentContainerStyle={styles.container}>
-            <Text style={styles.TextInput} >
-                CARDS
-            </Text>
+            <Text style={styles.TextInput}>CARDS</Text>
             <Text>Your new </Text>
             <TouchableOpacity
                 style={styles.loginBtn}
-                onPress={() => navigation.navigate("AddBook")}
+                onPress={() => navigation.navigate("Login")}
             >
                 <Text style={styles.loginText}>LOGIN</Text>
             </TouchableOpacity>
             <TouchableOpacity
                 style={styles.loginBtn}
-                onPress={() => navigation.navigate("AddBook")}
+                onPress={() => navigation.navigate("Signup")}
             >
                 <Text style={styles.loginText}>SIGN UP</Text>
             </TouchableOpacity>
-            
         </KeyboardAwareScrollView>
-
-
-    )    
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -88,5 +83,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default LandingPage
-
+export default LandingPage;
