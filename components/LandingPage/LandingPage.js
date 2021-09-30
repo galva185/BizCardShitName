@@ -1,91 +1,103 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import {
-    StyleSheet,
-    Text,
-    View,
-    Image,
-    TextInput,
-    Button,
-    TouchableOpacity,
-} from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useFonts } from "expo-font";
 
 const LandingPage = (props) => {
     const { navigation } = props;
 
-    const handlePress = () => {};
+    const [loaded] = useFonts({
+        Regular: require("../../assets/fonts/SF-Pro-Display-Regular.otf"),
+        Semibold: require("../../assets/fonts/SF-Pro-Display-Semibold.otf"),
+        Bold: require("../../assets/fonts/SF-Pro-Display-Bold.otf"),
+        Medium: require("../../assets/fonts/SF-Pro-Display-Medium.otf"),
+    });
 
     return (
         <View style={styles.container}>
-            <Text style={styles.TextInput}>CARDS</Text>
-            <Text>Your new </Text>
-            <TouchableOpacity
-                style={styles.loginBtn}
-                onPress={() => navigation.navigate("Login")}
-            >
-                <Text style={styles.loginText}>LOGIN</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                style={styles.loginBtn}
-                onPress={() => navigation.navigate("Signup")}
-            >
-                <Text style={styles.loginText}>SIGN UP</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                style={styles.loginBtn}
-                onPress={() => navigation.navigate("Home")}
-            >
-                <Text style={styles.loginText}>GO HOME</Text>
-            </TouchableOpacity>
+            <View style={styles.imageContainer}>
+                <Image source={require("../../assets/Avatar.png")} />
+            </View>
+            <Text style={styles.text}>Welcome To BizCards</Text>
+            <View style={styles.subTextView}>
+                <Text style={styles.subText}>
+                    The new and innovative way to save and share business cards.
+                </Text>
+            </View>
+            <View style={styles.btnContainer}>
+                <TouchableOpacity
+                    style={styles.loginBtn}
+                    onPress={() => navigation.navigate("Signup")}
+                >
+                    <Text style={styles.loginText}>Get Started</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+                    <Text style={{ color: "#FFFFFF", marginTop: "4%" }}>
+                        Already have an account? Log In
+                    </Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
+    imageContainer: {
+        marginBottom: "25%",
+    },
+
     container: {
         flex: 1,
-        backgroundColor: "#3A3A3C",
+        backgroundColor: "#000000",
         alignItems: "center",
         justifyContent: "center",
+        paddingBottom: "30%",
     },
 
-    image: {
-        marginBottom: 40,
-        resizeMode: "contain",
-        width: "40%",
+    subTextView: {
+        marginTop: "12%",
+        width: "70%",
     },
 
-    inputView: {
-        backgroundColor: "#eee",
-        borderRadius: 8,
-        width: "80%",
-        height: 60,
-        marginBottom: 20,
-        alignItems: "flex-start",
-        justifyContent: "flex-start",
-        paddingLeft: "5%",
-    },
-
-    TextInput: {
+    text: {
         color: "rgb(255,255,255)",
+        fontFamily: "Bold",
+        fontSize: 28,
+        fontWeight: "bold",
     },
 
-    forgot_button: {
-        height: 30,
-        marginBottom: 30,
+    subText: {
+        color: "#AEAEB2",
+        fontFamily: "Medium",
+        fontSize: 16,
+        textAlign: "center",
+    },
+
+    loginText: {
+        fontFamily: "Semibold",
+        fontSize: 17,
+    },
+
+    btnContainer: {
+        position: "absolute",
+        bottom: 0,
+        width: "100%",
+        marginBottom: "15%",
+        alignItems: "center",
     },
 
     loginBtn: {
         width: "80%",
-        borderRadius: 8,
+        borderRadius: 20,
+        fontFamily: "Regular",
         height: 50,
         alignItems: "center",
         justifyContent: "center",
         marginTop: 40,
-        backgroundColor: "#21b58b",
+        backgroundColor: "#FFFFFF",
     },
 });
 

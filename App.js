@@ -8,6 +8,8 @@ import Signup from "./components/Signup/Signup.js";
 import LandingPage from "./components/LandingPage/LandingPage.js";
 import Home from "./components/Home/Home.js";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { setCustomText } from "react-native-global-props";
+import { useFonts } from "expo-font";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -26,19 +28,6 @@ export default function App() {
                 <Stack.Screen name="Signup" component={Signup} />
                 <Stack.Screen name="Home" component={Home} />
             </Stack.Navigator>
-
-            {/** 
-            <Tab.Navigator
-                screenOptions={{
-                    headerShown: false,
-                }}
-                initialRouteName="Landing Page"
-            >
-                <Tab.Screen name="Landing Page" component={LandingPage} />
-                <Tab.Screen name="Login" component={Login} />
-                <Tab.Screen name="Signup" component={Signup} />
-            </Tab.Navigator>
-            */}
         </NavigationContainer>
     );
 }
@@ -46,7 +35,7 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff",
+        backgroundColor: "#000000",
         alignItems: "center",
         justifyContent: "center",
     },
