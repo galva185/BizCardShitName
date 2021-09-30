@@ -34,6 +34,12 @@ const LandingPage = (props) => {
                 >
                     <Text style={styles.loginText}>Get Started</Text>
                 </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.loginBtn}
+                    onPress={() => navigation.navigate("Camera")}
+                >
+                    <Text style={styles.loginText}>USE CAMERA(DEV)</Text>
+                </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate("Login")}>
                     <Text style={{ color: "#FFFFFF", marginTop: "4%" }}>
                         Already have an account? Log In
