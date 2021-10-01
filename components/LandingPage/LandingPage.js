@@ -30,7 +30,7 @@ const LandingPage = (props) => {
             <View style={styles.btnContainer}>
                 <TouchableOpacity
                     style={styles.loginBtn}
-                    onPress={() => navigation.navigate("Signup")}
+                    onPress={() => navigation.navigate("Signup Email")}
                 >
                     <Text style={styles.loginText}>Get Started</Text>
                 </TouchableOpacity>

@@ -29,13 +29,21 @@ export default function App() {
                 {/** DAVY */}
                 <Stack.Screen
                     name="Signup Email"
-                    options={{ header: () => null }}
+                    options={{
+                        headerTransparent: true,
+                        headerTitleStyle: styles.headerTextStyle,
+                        headerTitle: "",
+                    }}
                     component={SignupEmail}
                 />
                 {/** REY */}
                 <Stack.Screen
-                    name="Signup Password"
-                    options={{ header: () => null }}
+                    name="SignupPassword"
+                    options={{
+                        headerTransparent: true,
+                        headerTitleStyle: styles.headerTextStyle,
+                        headerTitle: "",
+                    }}
                     component={SignupPassword}
                 />
                 <Stack.Screen
