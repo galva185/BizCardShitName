@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
+const axios = require("axios");
 import {
   StyleSheet,
   Text,
@@ -19,9 +20,15 @@ import { useFonts } from "expo-font";
 import { ColorAndroid } from "react-native/Libraries/StyleSheet/PlatformColorValueTypesAndroid";
 import { withSafeAreaInsets } from "react-native-safe-area-context";
 
-const SignupPassword = (props) => {
+const SignupEmail = (props) => {
   const { route, navigation } = props;
-  const {email} = route.params;
+  let { email, password, firstname, lastname } = route.params
+
+    email = String(email)
+    password = String(password)
+    firstname = String(firstname)
+    lastname = String(lastname)
+    
 
   const [loaded] = useFonts({
     Regular: require("../../assets/fonts/SF-Pro-Display-Regular.otf"),
@@ -30,17 +37,50 @@ const SignupPassword = (props) => {
     Medium: require("../../assets/fonts/SF-Pro-Display-Medium.otf"),
   });
 
-  const [password, setPassword] = useState("");
-  const [password2, setPassword2] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
 
-  const refInput2 = useRef()
-
-  const handleSubmit = () => {
-    if (password === password2 && password2 != "") {
-      navigation.navigate("Signup FullName", {
-        email: email,
-        password: password
-      })
+  const handleSubmit = (e) => {
+    if (phoneNumber != "") {
+        console.log(email)
+        axios({
+            method: "post",
+            url: "https://business-card-backend-qkym9.ondigitalocean.app/createuser",
+            data: {
+                firstname: firstname,
+                lastname: lastname,
+                email: email,
+                userpassword: password,
+                username: "DavyThebornboZEDGOD2345BIGHAIR",
+            }
+        })
+            .then(function (response) {
+                console.log(response);
+                navigation.navigate("AccountCreated", {
+                    email: email,
+                    password: password,
+                    firstname: firstname,
+                    lastname: lastname,
+                    phonenumber: phoneNumber
+                })
+            })
+            .catch(function (error) {
+                if (error.response) {
+                    // Request made and server responded
+                    if (error.response.data === "Username is taken") {
+                        setUsernameError(true);
+                    } else if (error.response.data === "Email is taken") {
+                        setEmailError(true);
+                    }
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    console.log(error.request);
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log("Error", error.message);
+                }
+            });
+    } else {
+        console.log("No phone number provided");
     }
   };
 
@@ -52,56 +92,47 @@ const SignupPassword = (props) => {
       contentContainerStyle={styles.container}
     >
       <StatusBar style="light" />
-      <View style={styles.container}>
+      <View style={styles.main}>
         <View>
           <View>
-            <Text style={styles.h1}>What is your password?</Text>
+            <Text style={styles.h1}>What is your phone number?</Text>
           </View>
           <View>
             <TextInput
-            keyboardAppearance="dark"
+            keyboardType="number-pad"
               autoCompleteType="off"
               autoCorrect={false}
-              secureTextEntry={true}
+              keyboardAppearance="dark"
+              enablesReturnKeyAutomatically={true}
+              returnKeyType="next"
+              returnKeyLabel="continue"
+              onSubmitEditing={() => {handleSubmit()}}
               autoFocus={true}
               style={styles.input}
-              onSubmitEditing={() => { refInput2.current.focus(); }}
-              placeholder="Password"
+              placeholder="Phone Number"
               placeholderTextColor="rgba(235,235,245,.30)"
-              onChangeText={(password) => setPassword(password)}
+              onChangeText={(phoneNumber) => setPhoneNumber(phoneNumber)}
             />
-            <TextInput
-            ref={refInput2}
-            keyboardAppearance="dark"
-              autoCompleteType="off"
-              autoCorrect={false}
-              secureTextEntry={true}
-              style={styles.input}
-              onSubmitEditing={() => handleSubmit()}
-              placeholder="Confirm Password"
-              placeholderTextColor="rgba(235,235,245,.30)"
-              onChangeText={(password2) => setPassword2(password2)}
-            />
-            
           </View>
         </View>
-
-        {/** Validate if user entered an password */}
-        {(password != password2 || (password === "" && password2 === "")) && (
+        {/** Validate if user entered an phoneNumber */}
+        {phoneNumber === "" && (
           <TouchableOpacity
             disabled={true}
-            onPress={() => navigation.navigate("Signup FullName")}
+            onPress={() => navigation.navigate("AccountCreated", {
+                email: email,
+                password: password,
+                firstname: firstname,
+                lastname: lastname,
+                phonenumber: phoneNumber 
+            })}
           >
             <Text style={styles.btn}>Continue</Text>
           </TouchableOpacity>
         )}
-
-        {password === password2 && password2 != "" && (
+        {phoneNumber != "" && (
           <TouchableOpacity
-            onPress={() => navigation.navigate("Signup FullName", {
-              email: email,
-              password: password
-            })}
+            onPress={() => {handleSubmit()}}
           >
             <Text style={styles.btnActive}>Continue</Text>
           </TouchableOpacity>
@@ -130,7 +161,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     textAlign: "center",
     marginTop: -180,
-    paddingHorizontal: 20
+    paddingHorizontal: 10
   },
   input: {
     width: "100%",
@@ -142,7 +173,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingBottom: 10,
     paddingTop: 10,
-    marginBottom: 10,
+    marginBottom: 125,
     color: "#FFFFFF",
   },
   already: {
@@ -151,7 +182,7 @@ const styles = StyleSheet.create({
     fontFamily: "Bold",
     paddingTop: 20,
     paddingBottom: 15,
-    marginBottom: 15,
+    marginBottom: 70,
     textAlign: "center",
   },
   btn: {
@@ -164,7 +195,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     overflow: "hidden",
     width: "100%",
-    marginTop: 65
   },
   btncontainer: {
     position: "absolute",
@@ -181,8 +211,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     overflow: "hidden",
     width: "100%",
-    marginTop: 65
   },
 });
 
-export default SignupPassword;
+export default SignupEmail;

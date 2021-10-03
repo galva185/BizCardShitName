@@ -31,48 +31,67 @@ const SignupEmail = (props) => {
 
   const [email, setEmail] = useState("");
 
-
+  const handleSubmit = (e) => {
+    if (email != "") {
+      navigation.navigate("SignupPassword", {
+        email: email
+      })
+    } else {
+    }
+  };
 
   return (
     <KeyboardAwareScrollView
-    
-    bounces={false}
-    contentContainerStyle={styles.container}
-    extraHeight={350}>
-        <View style={styles.container}>
-          <StatusBar style="light" />
+      keyboardShouldPersistTaps="always"
+      scrollEnabled={false}
+      bounces={false}
+      contentContainerStyle={styles.container}
+    >
+      <StatusBar style="light" />
+      <View style={styles.main}>
+        <View>
           <View>
             <Text style={styles.h1}>What is your email address?</Text>
-            <View>
-              <TextInput
-                style={styles.input}
-                placeholder="Email Address"
-                placeholderTextColor="rgba(235,235,245,.30)"
-                onChangeText={(email) => setEmail(email)}
-              />
-              <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-                <Text style={styles.already}>Already have an account</Text>
-              </TouchableOpacity>
-            </View>
           </View>
-
-          {/** Validate if user entered an email */}
-          {email === "" && (
-            <TouchableOpacity
-              disabled={true}
-              onPress={() => navigation.navigate("SignupPassword")}
-            >
-              <Text style={styles.btn}>Continue</Text>
+          <View>
+            <TextInput
+              autoCompleteType="off"
+              autoCorrect={false}
+              keyboardAppearance="dark"
+              enablesReturnKeyAutomatically={true}
+              returnKeyType="next"
+              returnKeyLabel="continue"
+              onSubmitEditing={() => handleSubmit()}
+              autoFocus={true}
+              style={styles.input}
+              placeholder="Email Address"
+              placeholderTextColor="rgba(235,235,245,.30)"
+              onChangeText={(email) => setEmail(email)}
+            />
+            <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+              <Text style={styles.already}>Already have an account</Text>
             </TouchableOpacity>
-          )}
-          {email != "" && (
-            <TouchableOpacity
-              onPress={() => navigation.navigate("SignupPassword")}
-            >
-              <Text style={styles.btnActive}>Continue</Text>
-            </TouchableOpacity>
-          )}
+          </View>
         </View>
+        {/** Validate if user entered an email */}
+        {email === "" && (
+          <TouchableOpacity
+            disabled={true}
+            onPress={() => navigation.navigate("SignupPassword")}
+          >
+            <Text style={styles.btn}>Continue</Text>
+          </TouchableOpacity>
+        )}
+        {email != "" && (
+          <TouchableOpacity
+            onPress={() => navigation.navigate("SignupPassword", {
+              email: email
+            })}
+          >
+            <Text style={styles.btnActive}>Continue</Text>
+          </TouchableOpacity>
+        )}
+      </View>
     </KeyboardAwareScrollView>
   );
 };
@@ -83,14 +102,19 @@ const styles = StyleSheet.create({
     backgroundColor: "#000000",
     alignItems: "center",
     justifyContent: "center",
+    padding: 10,
+  },
+  main: {
+    backgroundColor: "#000000",
+    alignItems: "center",
+    width: "100%",
   },
   h1: {
     color: "#AEAEB2",
     fontFamily: "Medium",
     fontSize: 24,
     textAlign: "center",
-    marginBottom: 200,
-    marginTop: 150,
+    marginTop: -200,
   },
   input: {
     width: "100%",
@@ -101,15 +125,17 @@ const styles = StyleSheet.create({
     borderBottomColor: "rgba(84,84,88,.65)",
     paddingLeft: 10,
     paddingBottom: 10,
+    paddingTop: 10,
     color: "#FFFFFF",
   },
   already: {
     color: "rgba(0,122,255, 100)",
     fontSize: 14,
     fontFamily: "Bold",
-    paddingTop: 25,
+    paddingTop: 20,
+    paddingBottom: 15,
+    marginBottom: 70,
     textAlign: "center",
-    marginBottom: 200,
   },
   btn: {
     backgroundColor: "rgba(255,255,255,0.2)",
@@ -118,7 +144,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingVertical: 15,
     paddingHorizontal: 130,
-    marginBottom: "10%",
     borderRadius: 20,
     overflow: "hidden",
     width: "100%",
@@ -135,7 +160,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingVertical: 15,
     paddingHorizontal: 130,
-    marginBottom: "10%",
     borderRadius: 20,
     overflow: "hidden",
     width: "100%",

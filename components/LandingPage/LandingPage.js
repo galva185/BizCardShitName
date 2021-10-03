@@ -52,7 +52,7 @@ const LandingPage = (props) => {
 
 const styles = StyleSheet.create({
     imageContainer: {
-        marginBottom: "25%",
+        marginBottom: "25%"
     },
 
     container: {
