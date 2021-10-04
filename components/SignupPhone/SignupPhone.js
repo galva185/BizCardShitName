@@ -66,6 +66,7 @@ const SignupEmail = (props) => {
                         });
                     } else {
                         setAccountFailedCreation(true);
+                        setPhoneNumber("");
                         console.log(response.status);
                     }
                 })
@@ -127,6 +128,20 @@ const SignupEmail = (props) => {
                         />
                     </View>
                 </View>
+                {accountFailedCreation && (
+                    <View style={styles.accounrErrorView}>
+                        <Text style={styles.accountError}>
+                            An account with that email already exists.
+                        </Text>
+                        <Text style={styles.accountError}>
+                            Please try a different email.
+                        </Text>
+                    </View>
+                )}
+                {!accountFailedCreation && (
+                    <View style={styles.accounrErrorView}></View>
+                )}
+
                 {/** Validate if user entered an phoneNumber */}
                 {phoneNumber === "" && (
                     <TouchableOpacity
@@ -171,6 +186,15 @@ const styles = StyleSheet.create({
         alignItems: "center",
         width: "100%",
     },
+    accountError: {
+        color: "rgba(255,0,0,.8)",
+        fontSize: 13,
+        textAlign: "center",
+    },
+    accounrErrorView: {
+        height: 40,
+        width: "80%",
+    },
     h1: {
         color: "#AEAEB2",
         fontFamily: "Medium",
@@ -189,7 +213,7 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         paddingBottom: 10,
         paddingTop: 10,
-        marginBottom: 125,
+        marginBottom: 90,
         color: "#FFFFFF",
     },
     already: {
