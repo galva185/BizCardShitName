@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -19,9 +19,9 @@ import { useFonts } from "expo-font";
 import { ColorAndroid } from "react-native/Libraries/StyleSheet/PlatformColorValueTypesAndroid";
 import { withSafeAreaInsets } from "react-native-safe-area-context";
 
-const SignupPassword = (props) => {
+const AccountCreated = (props) => {
   const { route, navigation } = props;
-  const {email} = route.params;
+  const { email, password, firstname, lastname, phonenumber } = route.params;
 
   const [loaded] = useFonts({
     Regular: require("../../assets/fonts/SF-Pro-Display-Regular.otf"),
@@ -29,20 +29,6 @@ const SignupPassword = (props) => {
     Bold: require("../../assets/fonts/SF-Pro-Display-Bold.otf"),
     Medium: require("../../assets/fonts/SF-Pro-Display-Medium.otf"),
   });
-
-  const [password, setPassword] = useState("");
-  const [password2, setPassword2] = useState("");
-
-  const refInput2 = useRef()
-
-  const handleSubmit = () => {
-    if (password === password2 && password2 != "") {
-      navigation.navigate("Signup FullName", {
-        email: email,
-        password: password
-      })
-    }
-  };
 
   return (
     <KeyboardAwareScrollView
@@ -52,60 +38,24 @@ const SignupPassword = (props) => {
       contentContainerStyle={styles.container}
     >
       <StatusBar style="light" />
-      <View style={styles.container}>
+      <View style={styles.main}>
         <View>
+            <View style = {styles.imageContainer}>
+                <Image source = {require("../../assets/Avatar.png")} />
+            </View>
           <View>
-            <Text style={styles.h1}>What is your password?</Text>
+            <Text style={styles.h1}>Congratulations {firstname}!</Text>
           </View>
-          <View>
-            <TextInput
-            keyboardAppearance="dark"
-              autoCompleteType="off"
-              autoCorrect={false}
-              secureTextEntry={true}
-              autoFocus={true}
-              style={styles.input}
-              onSubmitEditing={() => { refInput2.current.focus(); }}
-              placeholder="Password"
-              placeholderTextColor="rgba(235,235,245,.30)"
-              onChangeText={(password) => setPassword(password)}
-            />
-            <TextInput
-            ref={refInput2}
-            keyboardAppearance="dark"
-              autoCompleteType="off"
-              autoCorrect={false}
-              secureTextEntry={true}
-              style={styles.input}
-              onSubmitEditing={() => handleSubmit()}
-              placeholder="Confirm Password"
-              placeholderTextColor="rgba(235,235,245,.30)"
-              onChangeText={(password2) => setPassword2(password2)}
-            />
-            
+          <View style = {styles.subtextview}>
+            <Text style = {styles.subtext}>You have successfully created your account, press continue to access your BizCards.</Text>
           </View>
         </View>
-
-        {/** Validate if user entered an password */}
-        {(password != password2 || (password === "" && password2 === "")) && (
           <TouchableOpacity
-            disabled={true}
-            onPress={() => navigation.navigate("Signup FullName")}
-          >
-            <Text style={styles.btn}>Continue</Text>
-          </TouchableOpacity>
-        )}
-
-        {password === password2 && password2 != "" && (
-          <TouchableOpacity
-            onPress={() => navigation.navigate("Signup FullName", {
-              email: email,
-              password: password
-            })}
+            onPress={() => navigation.navigate("Home")}
           >
             <Text style={styles.btnActive}>Continue</Text>
           </TouchableOpacity>
-        )}
+        
       </View>
     </KeyboardAwareScrollView>
   );
@@ -125,12 +75,13 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   h1: {
-    color: "#AEAEB2",
-    fontFamily: "Medium",
-    fontSize: 24,
+    color: "#fff",
+    fontFamily: "Bold",
+    fontWeight: "bold",
+    fontSize: 30,
     textAlign: "center",
-    marginTop: -180,
-    paddingHorizontal: 20
+    marginTop: "40%",
+    paddingHorizontal: 10
   },
   input: {
     width: "100%",
@@ -142,7 +93,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingBottom: 10,
     paddingTop: 10,
-    marginBottom: 10,
+    marginBottom: 125,
     color: "#FFFFFF",
   },
   already: {
@@ -151,7 +102,7 @@ const styles = StyleSheet.create({
     fontFamily: "Bold",
     paddingTop: 20,
     paddingBottom: 15,
-    marginBottom: 15,
+    marginBottom: 70,
     textAlign: "center",
   },
   btn: {
@@ -164,7 +115,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     overflow: "hidden",
     width: "100%",
-    marginTop: 65
   },
   btncontainer: {
     position: "absolute",
@@ -181,8 +131,30 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     overflow: "hidden",
     width: "100%",
-    marginTop: 65
   },
+  subtext: {
+      color: "rgba(174,174,178,1.0)",
+      textAlign:"center",
+      fontSize: 18,
+      fontWeight: '500',
+      fontFamily: "Bold"
+  },
+  subtextview: {
+    marginBottom: '50%',
+    marginTop: '10%',
+    width: '80%',
+    textAlign:"center",
+    alignContent: 'center'
+  },
+  imageContainer:{
+    marginTop: "25%",
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center"
+    
+  }
+
+
 });
 
-export default SignupPassword;
+export default AccountCreated;
