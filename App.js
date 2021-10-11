@@ -16,110 +16,112 @@ import Camera from "./components/Camera/Camera.js";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { setCustomText } from "react-native-global-props";
 import { useFonts } from "expo-font";
-
+import CategoryTab from "./components/CategoryTab/CategoryTab.js";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: true,
-        }}
-        initialRouteName="Landing Page"
-      >
-        {/** DAVY */}
-        <Stack.Screen
-          name="Signup Email"
-          options={{
-            headerTransparent: true,
-            headerTitleStyle: styles.headerTextStyle,
-            headerTitle: "",
-            headerBackTitleVisible: false,
-          }}
-          component={SignupEmail}
-        />
-        {/** REY */}
-        <Stack.Screen
-          name="SignupPassword"
-          options={{
-            headerTransparent: true,
-            headerTitleStyle: styles.headerTextStyle,
-            headerTitle: "",
-            
-          }}
-          component={SignupPassword}
-        />
-        <Stack.Screen
-          name="SignupPhone"
-          options={{
-            headerTransparent: true,
-            headerTitleStyle: styles.headerTextStyle,
-            headerTitle: "",
-            
-          }}
-          component={SignupPhone}
-        />
-        <Stack.Screen
-          name="Landing Page"
-          options={{ header: () => null }}
-          component={LandingPage}
-        />
-        <Stack.Screen
-          name="AccountCreated"
-          options={{ header: () => null }}
-          component={AccountCreated}
-        />
-        <Stack.Screen
-          name="Login"
-          options={{ header: () => null }}
-          component={Login}
-        />
-        <Stack.Screen
-          name="Signup"
-          options={{ header: () => null }}
-          component={Signup}
-        />
-        <Stack.Screen
-          name="Home"
-          options={{ header: () => null }}
-          component={Home}
-        />
-        <Stack.Screen
-          name="Signup FullName"
-          options={{
-            headerTransparent: true,
-            headerTitleStyle: styles.headerTextStyle,
-            headerTitle: "",
-          }}
-          component={SignupFullName}
-        />
-        <Stack.Screen
-          name="Camera"
-          options={{
-            headerTransparent: true,
-            headerTitleStyle: styles.headerTextStyle,
-            headerTitle: "Scan BizCard",
-          }}
-          component={Camera}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+    return (
+        <NavigationContainer>
+            <Stack.Navigator
+                screenOptions={{
+                    headerShown: true,
+                }}
+                initialRouteName="AccountCreated"
+            >
+                {/** DAVY */}
+                <Stack.Screen
+                    name="Signup Email"
+                    options={{
+                        headerTransparent: true,
+                        headerTitleStyle: styles.headerTextStyle,
+                        headerTitle: "",
+                        headerBackTitleVisible: false,
+                    }}
+                    component={SignupEmail}
+                />
+                {/** REY */}
+                <Stack.Screen
+                    name="SignupPassword"
+                    options={{
+                        headerTransparent: true,
+                        headerTitleStyle: styles.headerTextStyle,
+                        headerTitle: "",
+                    }}
+                    component={SignupPassword}
+                />
+                <Stack.Screen
+                    name="SignupPhone"
+                    options={{
+                        headerTransparent: true,
+                        headerTitleStyle: styles.headerTextStyle,
+                        headerTitle: "",
+                    }}
+                    component={SignupPhone}
+                />
+                <Stack.Screen
+                    name="Landing Page"
+                    options={{ header: () => null }}
+                    component={LandingPage}
+                />
+                <Stack.Screen
+                    name="AccountCreated"
+                    options={{ header: () => null }}
+                    component={AccountCreated}
+                />
+                <Stack.Screen
+                    name="Login"
+                    options={{ header: () => null }}
+                    component={Login}
+                />
+                <Stack.Screen
+                    name="Signup"
+                    options={{ header: () => null }}
+                    component={Signup}
+                />
+                <Stack.Screen
+                    name="Home"
+                    options={{ header: () => null }}
+                    component={Home}
+                />
+                <Stack.Screen
+                    name="Signup FullName"
+                    options={{
+                        headerTransparent: true,
+                        headerTitleStyle: styles.headerTextStyle,
+                        headerTitle: "",
+                    }}
+                    component={SignupFullName}
+                />
+                <Stack.Screen
+                    name="Camera"
+                    options={{
+                        headerTransparent: true,
+                        headerTitleStyle: styles.headerTextStyle,
+                        headerTitle: "Scan BizCard",
+                    }}
+                    component={Camera}
+                />
+                <Stack.Screen
+                    name="CategoryTab"
+                    options={{ header: () => null }}
+                    component={CategoryTab}
+                />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#000000",
-    alignItems: "center",
-    justifyContent: "center",
-    
-  },
+    container: {
+        flex: 1,
+        backgroundColor: "#000000",
+        alignItems: "center",
+        justifyContent: "center",
+    },
 
-  headerTextStyle: {
-    color: "#000",
-  },
+    headerTextStyle: {
+        color: "#000",
+    },
 });

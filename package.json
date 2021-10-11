@@ -29,8 +29,9 @@
     "react-native-qrcode-scanner": "^1.5.4",
     "react-native-safe-area-context": "3.2.0",
     "react-native-screens": "~3.4.0",
+    "react-native-vector-icons": "^8.1.0",
     "react-native-web": "~0.13.12",
-    "undefined": "react-native-safe-area-context\\"
+    "undefined": "@expo/vector-icons/Ionicons"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0"

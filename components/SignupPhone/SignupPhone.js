@@ -39,8 +39,6 @@ const SignupEmail = (props) => {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [accountFailedCreation, setAccountFailedCreation] = useState(false);
 
-    const accountFailed = () => {};
-
     const handleSubmit = (e) => {
         if (phoneNumber != "") {
             console.log(email);
