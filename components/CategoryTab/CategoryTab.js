@@ -8,6 +8,7 @@ import {
     ScrollView,
 } from "react-native";
 import { useFonts } from "expo-font";
+import Category from "../Category/Category.js";
 
 const CategoryTab = (props) => {
     const [loaded] = useFonts({
@@ -25,15 +26,21 @@ const CategoryTab = (props) => {
         "Painter",
     ];
 
+    /**
+     *  {testArray.map((test) => (
+                <TouchableOpacity key={test} style={styles.btn}>
+                    <Text style={styles.categoryTab}>{test}</Text>
+                </TouchableOpacity>
+            ))}
+     */
+
     return (
-        <View style={{ flex: 1 }}>
-            <ScrollView horizontal style={styles.categoryTabView}>
-                {testArray.map((test) => (
-                    <TouchableOpacity key={test} style={styles.btn}>
-                        <Text style={styles.categoryTab}>{test}</Text>
-                    </TouchableOpacity>
-                ))}
-            </ScrollView>
+        <View style={{ height: "100%", flexDirection: "row" }}>
+            {testArray.map((test) => (
+                <TouchableOpacity key={test} style={styles.btn}>
+                    <Text style={styles.categoryTab}>{test}</Text>
+                </TouchableOpacity>
+            ))}
         </View>
     );
 };
@@ -41,7 +48,7 @@ const CategoryTab = (props) => {
 const styles = StyleSheet.create({
     categoryTabView: {
         backgroundColor: "#ABABAB",
-        padding: "3%",
+        padding: 5,
     },
 
     categoryTab: {
@@ -51,12 +58,11 @@ const styles = StyleSheet.create({
     },
 
     btn: {
-        marginRight: 10,
-        padding: "5%",
-        paddingHorizontal: "11%",
+        marginRight: 15,
+        padding: 10,
+        paddingHorizontal: 20,
         borderRadius: 10,
         backgroundColor: "#FFF",
-        marginBottom: "50%",
     },
 });
 

@@ -38,12 +38,12 @@ const Card = (props) => {
 
 const styles = StyleSheet.create({
     cardView: {
-        marginTop: "5%",
+        marginBottom: 10,
         backgroundColor: "#c4c4c4",
-        width: "88%",
+        marginRight: 23,
         borderRadius: 10,
-        height: "20%",
-        marginHorizontal: "12%",
+        height: 130,
+        marginLeft: 23,
     },
 
     cardText: {
@@ -55,15 +55,6 @@ const styles = StyleSheet.create({
     cardImage: {
         maxHeight: "100%",
         maxWidth: "100%",
-    },
-
-    btn: {
-        marginRight: 10,
-        padding: "5%",
-        paddingHorizontal: "11%",
-        borderRadius: 10,
-        backgroundColor: "#FFF",
-        marginBottom: "50%",
     },
 });
 

@@ -20,6 +20,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { ScrollView } from "react-native-gesture-handler";
 
 //remove these imports when other pages are made succesfully
 import Signup from "../Signup/Signup.js";
@@ -27,6 +28,7 @@ import LandingPage from "../LandingPage/LandingPage.js";
 import Login from "../Login/Login.js";
 import CategoryTab from "../CategoryTab/CategoryTab.js";
 import Card from "../Card/Card.js";
+import Category from "../Category/Category.js";
 
 function HomePage(props) {
     const { route, navigation } = props;
@@ -39,6 +41,14 @@ function HomePage(props) {
         Bold: require("../../assets/fonts/SF-Pro-Display-Bold.otf"),
         Medium: require("../../assets/fonts/SF-Pro-Display-Medium.otf"),
     });
+
+    const testArray = [
+        "Contruction",
+        "Law",
+        "Electrician",
+        "Plumber",
+        "Painter",
+    ];
 
     return (
         <KeyboardAwareScrollView
@@ -73,12 +83,32 @@ function HomePage(props) {
                     onChangeText={(password2) => setPassword2(password2)}
                 />
             </View>
-            {/**        //Cannot figure out the horizontal scroll
-            <View style={styles.categoryContainer}>
-                <CategoryTab />
+            {/** GOING TO DO THE 5 CATEGORIES FOR A USER  IF THEY HAVE NONE THEN DONE RENDER THIS OUT RENDER A START ADDING THING*/}
+            <View style={{ height: "5%", marginTop: 17, width: "88%" }}>
+                <ScrollView
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                >
+                    <View
+                        style={{
+                            height: "100%",
+                            width: "80%",
+                            flexDirection: "row",
+                            marginLeft: 0,
+                        }}
+                    >
+                        <CategoryTab />
+                    </View>
+                </ScrollView>
             </View>
-             */}
-            <Card />
+            <View style={{ marginTop: 12, height: "57%", width: "100%" }}>
+                <ScrollView showsVerticalScrollIndicator={false}>
+                    <Card />
+                    <Card />
+                    <Card />
+                    <Card />
+                </ScrollView>
+            </View>
         </KeyboardAwareScrollView>
     );
 }
@@ -167,6 +197,17 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontFamily: "Medium",
     },
+    btn: {
+        backgroundColor: "#fff",
+        borderRadius: 10,
+        justifyContent: "center",
+        marginRight: 10,
+    },
+    categoryTab: {
+        color: "#000",
+        fontFamily: "Medium",
+        fontSize: 14,
+    },
 
     categoryContainer: {
         marginTop: "4%",
@@ -188,7 +229,7 @@ const styles = StyleSheet.create({
     },
 
     searchBarView: {
-        marginTop: "15%",
+        marginTop: "7%",
         marginLeft: "12%",
         marginRight: "12%",
         padding: "4%",
