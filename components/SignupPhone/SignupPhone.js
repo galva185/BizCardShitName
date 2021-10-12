@@ -174,13 +174,13 @@ const SignupEmail = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#000000",
+        backgroundColor: "#0D1120",
         alignItems: "center",
         justifyContent: "center",
         padding: 10,
     },
     main: {
-        backgroundColor: "#000000",
+        backgroundColor: "#0D1120",
         alignItems: "center",
         width: "100%",
     },
