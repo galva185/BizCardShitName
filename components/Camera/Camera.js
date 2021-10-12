@@ -12,6 +12,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useFonts } from "expo-font";
+import Ionicons from "react-native-vector-icons/Ionicons";
 import { BarCodeScanner } from "expo-barcode-scanner";
 
 const Camera = (props) => {
@@ -32,6 +33,13 @@ const Camera = (props) => {
         alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     };
 
+    const [loaded] = useFonts({
+        Regular: require("../../assets/fonts/SF-Pro-Display-Regular.otf"),
+        Semibold: require("../../assets/fonts/SF-Pro-Display-Semibold.otf"),
+        Bold: require("../../assets/fonts/SF-Pro-Display-Bold.otf"),
+        Medium: require("../../assets/fonts/SF-Pro-Display-Medium.otf"),
+    });
+
     if (hasPermission === null) {
         return <Text>Requesting for camera permission</Text>;
     }
@@ -46,6 +54,12 @@ const Camera = (props) => {
                 onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
                 style={StyleSheet.absoluteFillObject}
             />
+            <View style={styles.buttonView}>
+                <TouchableOpacity style={styles.backButton}>
+                    <Ionicons name="close" size="20" color="white" />
+                </TouchableOpacity>
+                <Text style={styles.cameraHeader}>Scan QR Code</Text>
+            </View>
             {scanned && (
                 <Button
                     title={"Tap to Scan Again"}
@@ -63,7 +77,7 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        backgroundColor: "#000000",
+        backgroundColor: "#0D1120",
         alignItems: "center",
         justifyContent: "center",
         paddingBottom: "30%",
@@ -72,6 +86,28 @@ const styles = StyleSheet.create({
     subTextView: {
         marginTop: "12%",
         width: "70%",
+    },
+
+    buttonView: {
+        width: "100%",
+        flexDirection: "row",
+        marginTop: "-125%",
+    },
+
+    backButton: {
+        borderRadius: 100,
+        padding: 10,
+        color: "#000",
+        backgroundColor: "#0247FB",
+        fontSize: 100,
+        marginLeft: "8%",
+    },
+
+    cameraHeader: {
+        marginLeft: "8%",
+        fontSize: 28,
+        fontFamily: "Bold",
+        color: "#ABB1C8",
     },
 
     text: {

@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { useFonts } from "expo-font";
 import Category from "../Category/Category.js";
+const axios = require("axios");
 
 const CategoryTab = (props) => {
     const [loaded] = useFonts({
@@ -18,7 +19,9 @@ const CategoryTab = (props) => {
         Medium: require("../../assets/fonts/SF-Pro-Display-Medium.otf"),
     });
 
-    const testArray = [
+    const userId = 1;
+
+    const categoryArray = [
         "Contruction",
         "Law",
         "Electrician",
@@ -26,19 +29,45 @@ const CategoryTab = (props) => {
         "Painter",
     ];
 
-    /**
-     *  {testArray.map((test) => (
-                <TouchableOpacity key={test} style={styles.btn}>
-                    <Text style={styles.categoryTab}>{test}</Text>
-                </TouchableOpacity>
-            ))}
-     */
+    useEffect(() => {
+        axios({
+            method: "get",
+            url: "https://business-card-backend-qkym9.ondigitalocean.app/getcards",
+            params: {
+                id: userId,
+            },
+            //need the query strings i believe
+        })
+            .then(function (response) {
+                categories = response.data;
+                categories.forEach((category) =>
+                    categoryArray.append(category)
+                );
+                //ADD EVERY CATEGORY TO THE CATEGORY ARRAY TO DISPLAY IN HORIZONTAL SCROLL
+            })
+            .catch(function (error) {
+                if (error.response) {
+                    // Request made and server responded
+                    if (error.response.data === "Username is taken") {
+                        setUsernameError(true);
+                    } else if (error.response.data === "Email is taken") {
+                        setEmailError(true);
+                    }
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    console.log(error.request);
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log("Error", error.message);
+                }
+            });
+    });
 
     return (
         <View style={{ height: "100%", flexDirection: "row" }}>
-            {testArray.map((test) => (
-                <TouchableOpacity key={test} style={styles.btn}>
-                    <Text style={styles.categoryTab}>{test}</Text>
+            {categoryArray.map((item) => (
+                <TouchableOpacity key={item} style={styles.btn}>
+                    <Text style={styles.categoryTab}>{item}</Text>
                 </TouchableOpacity>
             ))}
         </View>
@@ -47,12 +76,12 @@ const CategoryTab = (props) => {
 
 const styles = StyleSheet.create({
     categoryTabView: {
-        backgroundColor: "#ABABAB",
+        backgroundColor: "#0247FB",
         padding: 5,
     },
 
     categoryTab: {
-        color: "#000",
+        color: "#FFF",
         fontFamily: "Medium",
         fontSize: 14,
     },
@@ -61,8 +90,8 @@ const styles = StyleSheet.create({
         marginRight: 15,
         padding: 10,
         paddingHorizontal: 20,
-        borderRadius: 10,
-        backgroundColor: "#FFF",
+        borderRadius: 30,
+        backgroundColor: "#212F46",
     },
 });
 

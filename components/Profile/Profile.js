@@ -29,7 +29,7 @@ import CategoryTab from "../CategoryTab/CategoryTab.js";
 import Card from "../Card/Card.js";
 import Camera from "../Camera/Camera.js";
 
-function HomePage(props) {
+function Profile(props) {
     const { route, navigation } = props;
     const { firstname } = route.params;
     const [search, setSearch] = useState("");
@@ -61,7 +61,7 @@ function HomePage(props) {
                     style={styles.searchIcon}
                     name="search"
                     size={20}
-                    color="#ABB1C8"
+                    color="#FFF"
                 />
                 <TextInput
                     keyboardAppearance="dark"
@@ -103,71 +103,10 @@ function HomePage(props) {
     );
 }
 
-const Tab = createBottomTabNavigator();
-
-const Home = (props) => {
-    const { route, navigation } = props;
-    const { email, firstname } = route.params;
-
-    const handlePress = () => {};
-
-    return (
-        <Tab.Navigator
-            screenOptions={({ route }) => ({
-                headerShown: false,
-                tabBarIcon: ({ focused, color, size }) => {
-                    let iconName;
-
-                    if (route.name === "Home Page") {
-                        iconName = focused ? "home" : "home-outline";
-                        size = focused ? 22 : 22;
-                    } else if (route.name === "Camera") {
-                        iconName = focused ? "scan" : "scan-outline";
-                        size = focused ? 25 : 25;
-                    } else if (route.name === "Signup") {
-                        iconName = focused ? "person" : "person-outline";
-                        size = focused ? 22 : 22;
-                    }
-                    return (
-                        <Ionicons name={iconName} size={size} color={color} />
-                    );
-                },
-                tabBarActiveTintColor: "white",
-                tabBarInactiveTintColor: "white",
-                tabBarStyle: { backgroundColor: "#0D1120" },
-            })}
-            initialRouteName="Home Page"
-        >
-            <Tab.Screen
-                name="Home Page"
-                component={HomePage}
-                initialParams={{ firstname: firstname }}
-                options={({ route }) => ({
-                    tabBarShowLabel: false,
-                })}
-            />
-            <Tab.Screen
-                name="Camera"
-                component={Camera}
-                options={({ route }) => ({
-                    tabBarShowLabel: false,
-                })}
-            />
-            <Tab.Screen
-                name="Signup"
-                component={Signup}
-                options={({ route }) => ({
-                    tabBarShowLabel: false,
-                })}
-            />
-        </Tab.Navigator>
-    );
-};
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#0D1120",
+        backgroundColor: "#000000",
         alignItems: "center",
     },
 
@@ -186,7 +125,7 @@ const styles = StyleSheet.create({
     },
 
     helloText: {
-        color: "#ABB1C8",
+        color: "#FFF",
         fontSize: 16,
         fontFamily: "Medium",
     },
@@ -229,7 +168,7 @@ const styles = StyleSheet.create({
         width: "88%",
         flexDirection: "row",
         alignItems: "center",
-        backgroundColor: "#212F46",
+        backgroundColor: "rgba(54, 54, 54, .8)",
         borderRadius: 10,
     },
 
@@ -279,4 +218,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Home;
+export default Profile;
