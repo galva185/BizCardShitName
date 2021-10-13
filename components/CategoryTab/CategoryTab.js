@@ -8,7 +8,6 @@ import {
     ScrollView,
 } from "react-native";
 import { useFonts } from "expo-font";
-import Category from "../Category/Category.js";
 const axios = require("axios");
 
 const CategoryTab = (props) => {
@@ -18,6 +17,8 @@ const CategoryTab = (props) => {
         Bold: require("../../assets/fonts/SF-Pro-Display-Bold.otf"),
         Medium: require("../../assets/fonts/SF-Pro-Display-Medium.otf"),
     });
+
+    const [activeCategory, setActiveCategory] = useState("");
 
     const userId = 1;
 
@@ -63,13 +64,35 @@ const CategoryTab = (props) => {
             });
     });
 
+    const handlePress = (item) => {
+        if (activeCategory === item) {
+            setActiveCategory("");
+        } else {
+            setActiveCategory(item);
+        }
+    };
+
     return (
         <View style={{ height: "100%", flexDirection: "row" }}>
-            {categoryArray.map((item) => (
-                <TouchableOpacity key={item} style={styles.btn}>
-                    <Text style={styles.categoryTab}>{item}</Text>
-                </TouchableOpacity>
-            ))}
+            {categoryArray.map((item) => {
+                return activeCategory === item ? (
+                    <TouchableOpacity
+                        key={item}
+                        style={styles.btnActive}
+                        onPress={() => handlePress(item)}
+                    >
+                        <Text style={styles.categoryTab}>{item}</Text>
+                    </TouchableOpacity>
+                ) : (
+                    <TouchableOpacity
+                        key={item}
+                        style={styles.btn}
+                        onPress={() => handlePress(item)}
+                    >
+                        <Text style={styles.categoryTab}>{item}</Text>
+                    </TouchableOpacity>
+                );
+            })}
         </View>
     );
 };
@@ -92,6 +115,14 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         borderRadius: 30,
         backgroundColor: "#212F46",
+    },
+
+    btnActive: {
+        marginRight: 15,
+        padding: 10,
+        paddingHorizontal: 20,
+        borderRadius: 30,
+        backgroundColor: "#0247FB",
     },
 });
 

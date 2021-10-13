@@ -49,16 +49,26 @@ const Camera = (props) => {
 
     return (
         <View style={styles.container}>
+            <StatusBar style="light" />
             <BarCodeScanner
                 barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
                 onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
                 style={StyleSheet.absoluteFillObject}
             />
-            <View style={styles.buttonView}>
-                <TouchableOpacity style={styles.backButton}>
-                    <Ionicons name="close" size="20" color="white" />
-                </TouchableOpacity>
-                <Text style={styles.cameraHeader}>Scan QR Code</Text>
+            <View style={styles.parentView}>
+                <View style={styles.buttonView}>
+                    <TouchableOpacity style={styles.button}>
+                        <Ionicons
+                            name="close"
+                            size="20"
+                            color="white"
+                            onPress={() => navigation.navigate("Home Page")}
+                        />
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.headerView}>
+                    <Text style={styles.cameraHeader}>Scan QR Code</Text>
+                </View>
             </View>
             {scanned && (
                 <Button
@@ -88,26 +98,31 @@ const styles = StyleSheet.create({
         width: "70%",
     },
 
-    buttonView: {
+    parentView: {
         width: "100%",
         flexDirection: "row",
         marginTop: "-125%",
     },
 
-    backButton: {
-        borderRadius: 100,
-        padding: 10,
-        color: "#000",
-        backgroundColor: "#0247FB",
-        fontSize: 100,
+    buttonView: {
         marginLeft: "8%",
     },
 
+    headerView: { marginLeft: "8%" },
+
+    button: {
+        borderRadius: 100,
+        padding: 10,
+        color: "#000",
+        backgroundColor: "#0D1120",
+        fontSize: 100,
+    },
+
     cameraHeader: {
-        marginLeft: "8%",
+        marginTop: "1%",
         fontSize: 28,
         fontFamily: "Bold",
-        color: "#ABB1C8",
+        color: "#ccd1e6",
     },
 
     text: {

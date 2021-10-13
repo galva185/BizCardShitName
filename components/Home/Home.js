@@ -50,6 +50,7 @@ function HomePage(props) {
             bounces={false}
             contentContainerStyle={styles.container}
         >
+            <StatusBar style="light" />
             <View style={styles.helloTextView}>
                 <Text style={styles.helloText}>Hello {firstname}!</Text>
             </View>
@@ -91,7 +92,7 @@ function HomePage(props) {
                     </View>
                 </ScrollView>
             </View>
-            <View style={{ marginTop: 12, height: "60%", width: "100%" }}>
+            <View style={{ marginTop: 15, height: "59%", width: "100%" }}>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <Card />
                     <Card />
