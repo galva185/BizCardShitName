@@ -100,8 +100,11 @@ const styles = StyleSheet.create({
 
     parentView: {
         width: "100%",
+        height: "20%",
         flexDirection: "row",
-        marginTop: "-125%",
+        paddingTop: "20%",
+        marginTop: "-150%",
+        backgroundColor: "rgba(13, 17, 32,.5)",
     },
 
     buttonView: {
@@ -119,7 +122,7 @@ const styles = StyleSheet.create({
     },
 
     cameraHeader: {
-        marginTop: "1%",
+        marginTop: "3%",
         fontSize: 28,
         fontFamily: "Bold",
         color: "#ccd1e6",
